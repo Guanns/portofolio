@@ -9,7 +9,7 @@ const cardsData = [
   {
   type: "about",
   title: "Experiences",
-  subtitle: "Full Stack Developer",
+  subtitle: "2022 - 2025",
   bullets: [
     "👨‍🎓 Served as Student Council President (2022–2023), leading school wide initiatives and events.",
     "🎤 Led the Independence Day Ceremony as Chief Ceremony Commander, August 17th, 2022.",
