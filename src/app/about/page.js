@@ -49,9 +49,8 @@ const AboutPage = () => {
           My Favorite Songs
         </h2>
 
-        {/* DIUBAH: Grid sekarang menjadi 3 kolom di layar besar (lg) untuk tampilan lebih lebar */}
+
         <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-8 gap-y-4">
-          {/* GANTI SETIAP SRC DENGAN URL EMBED LAGU ANDA */}
           <iframe
             style={{ borderRadius: '12px' }}
             src="https://open.spotify.com/embed/track/1gSlPyS178VS0UwWLbgjcl?si=8eb5d693ca044d77" // asumuh
@@ -94,7 +93,7 @@ const AboutPage = () => {
           
           <iframe
             style={{ borderRadius: '12px' }}
-            src="https://open.spotify.com/embed/track/5i0klM2RR5OCpQcZUnJhhQ?si=99af1bc14b224ebe" // terkagum kagum
+            src="https://open.spotify.com/embed/track/32Pdf9eyXDEMoClEJW6yYP?si=908e0a5ccf804754" // Interaksi
             width="100%"
             height="80"
             frameBorder="0"

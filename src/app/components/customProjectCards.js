@@ -8,8 +8,8 @@ import { useSprings, useSpring, animated, to as springTo, config } from "@react-
 const cardsData = [
   {
     type: "about",
-    title: "Andika Akhdan",
-    subtitle: "Full Stack Developer | Software Engineer",
+    title: "Experiences",
+    subtitle: "Full Stack Developer",
     bullets: [
       "",
       "",
@@ -21,6 +21,7 @@ const cardsData = [
     title: "Skills",
     skills: [
       { name: "HTML & CSS", level: 85 },
+      { name: "PHP / Laravel", level: 25 },
       { name: "JavaScript (ES6+)", level: 70 },
       { name: "React & Next.js", level: 68 },
       { name: "Node.js & Express", level: 65 },
@@ -28,6 +29,7 @@ const cardsData = [
       { name: "Java", level: 55 },
       { name: "Golang", level: 60},
       { name: "Python", level: 70 },
+      { name: "SQL", level: 50 },
     ],
   },
   {

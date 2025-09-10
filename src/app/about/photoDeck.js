@@ -1,11 +1,10 @@
-// src/app/about/photoDeck.js
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useSprings, animated, to as springTo } from "@react-spring/web";
 
-// --- DATA FOTO (tetap milikmu) ---
+// --- DATA FOTO ---
 const photosData = [
   { imageUrl: "/pict-about.jpg",  caption: "Me When Doing Nothing In My School." },
   { imageUrl: "/pict-about2.jpg", caption: "Hello World!" },
