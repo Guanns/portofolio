@@ -7,8 +7,8 @@ import { useSprings, animated, to as springTo } from "@react-spring/web";
 // --- DATA FOTO ---
 const photosData = [
   { imageUrl: "/pict-about.jpg",  caption: "Me When Doing Nothing In My School." },
-  { imageUrl: "/pict-about2.jpg", caption: "Hello World!" },
-  { imageUrl: "/pict-about3.jpg", caption: "Powered by coffee and Wi-Fi." },
+  { imageUrl: "/Pict-about2.jpg", caption: "Hello World!" },
+  { imageUrl: "/Pict-about3.jpg", caption: "Powered by coffee and Wi-Fi." },
   { imageUrl: "/pict-about4.jpg", caption: "Good at overthinking, bad at replying texts." }
 ];
 
