@@ -51,7 +51,7 @@ const Hero = () => {
   <section className="flex flex-col items-center md:items-start justify-center px-4 pt-1 pb-2 md:pt-8 md:pb-8">
     <div className="w-full text-center md:text-left">
       <h1 className="font-italic text-4xl md:text-5xl leading-tight">
-        Hi, I'm Andika.
+        Hi, I&apos;m Andika.
       </h1>
       <p className="mt-2 md:mt-4 text-base md:text-xl text-gray-300">
         Sophomore | Software Engineer@Ubsi

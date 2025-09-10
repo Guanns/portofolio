@@ -19,7 +19,7 @@ const AboutPage = () => {
           <div className="space-y-4 md:space-y-6 text-base md:text-lg text-gray-300 leading-relaxed text-center md:text-left">
             <p>
               Hi, You can call me Andika or dika. Im a sophomore at Universitas Bina Sarana Informatika,
-              majoring in Software Engineering. I'm passionate about building web applications and Software.
+              majoring in Software Engineering. I&apos;m passionate about building web applications and Software.
             </p>
             <p>
               Many valuable experiences have shaped who I am today from serving as the Student Council President in the 2022 until 2023 academic year.
@@ -30,8 +30,8 @@ const AboutPage = () => {
             </p>
             <p>
               In the midst of my daily activities, I truly enjoy relaxing single-player games.
-              I usually play them while listening to my favorite songs works by Tulus, Asumuh, Hindia, Maliq & D’Essentials, Ardhito Pramono, Arash Buana,
-              along with a mix of other random tracks. It’s my way of unwinding, finding balance, and keeping creativity alive.
+              I usually play them while listening to my favorite songs works by Tulus, Asumuh, Hindia, Maliq & D&apos;Essentials, Ardhito Pramono, Arash Buana,
+              along with a mix of other random tracks. It&apos;s my way of unwinding, finding balance, and keeping creativity alive.
               Beyond entertainment, these small moments of leisure help me stay inspired, refreshed, and ready to face new challenges with a clear mind.
             </p>
           </div>
