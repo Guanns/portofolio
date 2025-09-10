@@ -9,13 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@react-spring/web": "^10.0.2",
+    "@react-spring/web": "^9.7.5",
     "@use-gesture/react": "^10.3.1",
     "next": "15.5.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-spring": "^10.0.1",
-    "react-tinder-card": "^1.6.4"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
