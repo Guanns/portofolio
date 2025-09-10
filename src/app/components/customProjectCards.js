@@ -7,15 +7,16 @@ import { useSprings, useSpring, animated, to as springTo, config } from "@react-
 /* ------------------ KONTEN KARTU ------------------ */
 const cardsData = [
   {
-    type: "about",
-    title: "Experiences",
-    subtitle: "Full Stack Developer",
-    bullets: [
-      "",
-      "",
-      "",
-    ],
-  },
+  type: "about",
+  title: "Experiences",
+  subtitle: "Full Stack Developer",
+  bullets: [
+    "👨‍🎓 Served as Student Council President (2022–2023), leading school wide initiatives and events.",
+    "🎤 Led the Independence Day Ceremony as Chief Ceremony Commander, August 17th, 2022.",
+    "📂 Project Manager at developp.id, overseeing project timelines, teams, and deliverables.",
+    "🌐 Part of Google Developer Group (GDG) Jakarta, engaging in community driven tech events."
+  ],
+},
   {
     type: "skills",
     title: "Skills",

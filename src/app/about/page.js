@@ -12,11 +12,11 @@ const AboutPage = () => {
 
         {/* --- KOLOM KIRI (HANYA TEKS) --- */}
         <div className="mt-6 md:mt-20 md:w-2/3">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 md:mb-6 text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold mb-10 md:mb-6 text-center md:text-left">
             Andika Akhdan
           </h1>
 
-          <div className="space-y-4 md:space-y-6 text-base md:text-lg text-gray-300 leading-relaxed text-center md:text-left">
+          <div className="space-y-4 md:space-y-6 text-base md:text-lg text-gray-300 leading-relaxed text-left">
             <p>
               Hi, You can call me Andika or dika. Im a sophomore at Universitas Bina Sarana Informatika,
               majoring in Software Engineering. I&apos;m passionate about building web applications and Software.
