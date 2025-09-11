@@ -2,21 +2,21 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useSprings, useSpring, animated, to as springTo, config } from "@react-spring/web";
+import { useSpring, useSprings, animated, to as springTo, config } from "@react-spring/web";
 
 /* ------------------ KONTEN KARTU ------------------ */
 const cardsData = [
   {
-  type: "about",
-  title: "Experiences",
-  subtitle: "2022 - 2025",
-  bullets: [
-    "👨‍🎓 Served as Student Council President (2022–2023), leading school wide initiatives and events.",
-    "🎤 Led the Independence Day Ceremony as Chief Ceremony Commander, August 17th, 2022.",
-    "📂 Project Manager at developp.id, overseeing project timelines, teams, and deliverables.",
-    "🌐 Part of Google Developer Group (GDG) Jakarta, engaging in community driven tech events."
-  ],
-},
+    type: "about",
+    title: "Experiences",
+    subtitle: "2022 - 2025",
+    bullets: [
+      "👨‍🎓 Served as Student Council President (2022–2023), leading school wide initiatives and events.",
+      "🎤 Led the Independence Day Ceremony as Chief Ceremony Commander, August 17th, 2022.",
+      "📂 Project Manager at developp.id, overseeing project timelines, teams, and deliverables.",
+      "🌐 Part of Google Developer Group (GDG) Jakarta, engaging in community driven tech events.",
+    ],
+  },
   {
     type: "skills",
     title: "Skills",
@@ -28,7 +28,7 @@ const cardsData = [
       { name: "Node.js & Express", level: 65 },
       { name: "Tailwind CSS", level: 79 },
       { name: "Java", level: 55 },
-      { name: "Golang", level: 60},
+      { name: "Golang", level: 60 },
       { name: "Python", level: 70 },
       { name: "SQL", level: 50 },
     ],
@@ -49,7 +49,7 @@ const cardsData = [
 const AnimatedNumber = ({ n, active }) => {
   const { number } = useSpring({
     from: { number: 0 },
-    number: active ? n : 0,
+    to: { number: active ? n : 0 },
     delay: 120,
     config: config.molasses,
     reset: !active,
@@ -68,7 +68,9 @@ const SkillBar = ({ skill, level, active }) => {
     <div className="w-full my-2">
       <div className="flex justify-between text-sm mb-1 text-gray-100/90">
         <span>{skill}</span>
-        <span><AnimatedNumber n={level} active={active} />%</span>
+        <span>
+          <AnimatedNumber n={level} active={active} />%
+        </span>
       </div>
       <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
         <animated.div
@@ -102,9 +104,12 @@ const fancyBg = (type) => {
 
 const fancyAccent = (type) => {
   switch (type) {
-    case "skills": return "bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300";
-    case "achievements": return "bg-gradient-to-r from-amber-300 via-orange-300 to-rose-300";
-    default: return "bg-gradient-to-r from-indigo-300 via-violet-300 to-sky-300";
+    case "skills":
+      return "bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300";
+    case "achievements":
+      return "bg-gradient-to-r from-amber-300 via-orange-300 to-rose-300";
+    default:
+      return "bg-gradient-to-r from-indigo-300 via-violet-300 to-sky-300";
   }
 };
 
@@ -112,7 +117,7 @@ const fancyAccent = (type) => {
 function Deck() {
   const count = cardsData.length;
 
-  // Deteksi mobile (<= 767px) untuk atur layout & animasi khusus
+  // Deteksi mobile
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -125,54 +130,70 @@ function Deck() {
   // urutan kartu (0 = paling atas)
   const [order, setOrder] = useState(Array.from({ length: count }, (_, i) => i));
   const orderRef = useRef(order);
-  useEffect(() => { orderRef.current = order; }, [order]);
+  useEffect(() => {
+    orderRef.current = order;
+  }, [order]);
 
-  // seed hanya untuk layout desktop yang acak
+  // seed untuk layout desktop acak
   const [seed, setSeed] = useState(1);
   const [outIdx, setOutIdx] = useState(null);
   const [outDir, setOutDir] = useState(1);
 
-  // PARAMETER ANIMASI – mobile dibuat lebih smooth & pelan
-  const SWIPE_MS     = isMobile ? 520 : 420;   // durasi animasi geser
-  const INTERVAL_MS  = isMobile ? 6500 : 5200; // jeda antar swipe otomatis
-  const SWIPE_OFFSET = isMobile ? 80  : 110;   // jarak geser ke kiri/kanan
-  const ROTATE_MAX   = isMobile ? 2   : 6;     // rotasi saat swipe
-  const BASE_CFG     = isMobile
-    ? { mass: 0.9, tension: 220, friction: 36 } // lebih “lembut”
+  // PARAMETER ANIMASI
+  const SWIPE_MS = isMobile ? 520 : 420; // durasi geser
+  const INTERVAL_MS = isMobile ? 6500 : 5200; // jeda antar swipe otomatis
+  const SWIPE_OFFSET = isMobile ? 80 : 110; // jarak geser
+  const ROTATE_MAX = isMobile ? 2 : 6; // rotasi saat swipe
+  const BASE_CFG = isMobile
+    ? { mass: 0.9, tension: 220, friction: 36 }
     : { mass: 0.9, tension: 380, friction: 30 };
 
   const [springs, api] = useSprings(count, () => ({
-    x: 0, y: 0, rotZ: 0, rotY: 0, scale: 1, z: 0, opacity: 1, config: BASE_CFG,
+    x: 0,
+    y: 0,
+    rotZ: 0,
+    rotY: 0,
+    scale: 1,
+    z: 0,
+    opacity: 1,
+    config: BASE_CFG,
   }));
 
-  // Layout posisi tiap lapis tumpukan
+  // Layout posisi tiap lapis
   const layoutForPos = useMemo(() => {
     if (isMobile) {
-      // MOBILE: rapi — tanpa jitter, rotasi sangat kecil, stacking halus
+      // MOBILE: rapi, tanpa jitter
       return Array.from({ length: count }, (_, pos) => {
-        const yStack = pos * -10;           // sedikit bertumpuk ke atas
-        const rZ = pos === 0 ? 0 : (pos % 2 ? -0.5 : 0.5);
-        const sc = 1 - pos * 0.04;          // skala turun tipis
-        return { x: 0, y: yStack, rotZ: rZ, rotY: 0, scale: sc, opacity: Math.max(0.3, 1 - pos * 0.15) };
+        const yStack = pos * -10;
+        const rZ = pos === 0 ? 0 : pos % 2 ? -0.5 : 0.5;
+        const sc = 1 - pos * 0.04;
+        return {
+          x: 0,
+          y: yStack,
+          rotZ: rZ,
+          rotY: 0,
+          scale: sc,
+          opacity: Math.max(0.3, 1 - pos * 0.15),
+        };
       });
     }
 
-    // DESKTOP/TABLET: tetap acak seperti sebelumnya
-    const randBetween = (seed, a, b) => {
-      const x = Math.sin(seed) * 43758.5453;
-      const frac = x - Math.floor(x);
-      return a + frac * (b - a);
-    };
-
-    const s = seed;
+    // DESKTOP/TABLET: acak
     return Array.from({ length: count }, (_, pos) => {
       const baseY = pos * -12;
-      const xJit = randBetween(s + pos * 13.37, -12, 12);
-      const yJit = randBetween(s + pos * 7.77, -4, 4);
-      const rZ = randBetween(s + pos * 5.55, -8, 8);
-      const rY = randBetween(s + pos * 9.99, -6, 6);
+      const xJit = randBetween(seed + pos * 13.37, -12, 12);
+      const yJit = randBetween(seed + pos * 7.77, -4, 4);
+      const rZ = randBetween(seed + pos * 5.55, -8, 8);
+      const rY = randBetween(seed + pos * 9.99, -6, 6);
       const sc = 1 - pos * 0.055;
-      return { x: xJit, y: baseY + yJit, rotZ: rZ, rotY: rY, scale: sc, opacity: Math.max(0.25, 1 - pos * 0.16) };
+      return {
+        x: xJit,
+        y: baseY + yJit,
+        rotZ: rZ,
+        rotY: rY,
+        scale: sc,
+        opacity: Math.max(0.25, 1 - pos * 0.16),
+      };
     });
   }, [count, seed, isMobile]);
 
@@ -194,36 +215,79 @@ function Deck() {
           z: count + 5,
           opacity: 0.92,
           immediate: (k) => k === "z",
-          config: isMobile ? { mass: 0.9, tension: 210, friction: 34 } : { mass: 0.9, tension: 340, friction: 28 },
+          config: isMobile
+            ? { mass: 0.9, tension: 210, friction: 34 }
+            : { mass: 0.9, tension: 340, friction: 28 },
         };
       }
       const pos = order.indexOf(i);
       const lay = layoutForPos[pos];
       return {
-        x: lay.x, y: lay.y, rotZ: lay.rotZ, rotY: lay.rotY, scale: lay.scale,
-        z: count - pos, opacity: lay.opacity, immediate: (k) => k === "z",
+        x: lay.x,
+        y: lay.y,
+        rotZ: lay.rotZ,
+        rotY: lay.rotY,
+        scale: lay.scale,
+        z: count - pos,
+        opacity: lay.opacity,
+        immediate: (k) => k === "z",
         config: BASE_CFG,
       };
     });
-  }, [api, order, outIdx, outDir, layoutForPos, count, isMobile]);
+  }, [api, order, outIdx, outDir, layoutForPos, count, isMobile, SWIPE_OFFSET, ROTATE_MAX, BASE_CFG]);
 
-  // Auto-swipe
+  // Auto-swipe — DITAMBAHKAN PAUSE CHECK
   useEffect(() => {
-    const interval = setInterval(() => {
+    let alive = true;
+
+    const tick = () => {
+      if (!alive) return;
+
+      // ✅ PAUSE: kalau PasswordGate/ChatModal terbuka, jangan gerakkan deck
+      if (typeof window !== "undefined" && window.__PAUSE_DECK__) return;
+
       const top = orderRef.current[0];
       const dir = Math.random() < 0.5 ? -1 : 1;
-      setOutIdx(top); setOutDir(dir);
+
+      setOutIdx(top);
+      setOutDir(dir);
+
       setTimeout(() => {
-        setOrder((prev) => { const [first, ...rest] = prev; return [...rest, first]; });
-        if (!isMobile) setSeed((s) => s + 1); // desktop tetap reshuffle
+        if (!alive) return;
+        setOrder((prev) => {
+          const [first, ...rest] = prev;
+          return [...rest, first];
+        });
+        if (!isMobile) setSeed((s) => s + 1); // desktop reshuffle
         setOutIdx(null);
       }, SWIPE_MS);
-    }, INTERVAL_MS);
-    return () => clearInterval(interval);
+    };
+
+    const interval = setInterval(tick, INTERVAL_MS);
+
+    // Tambahan: pause saat tab tidak aktif
+    const visHandler = () => {
+      const hidden = document.hidden;
+      if (hidden) {
+        window.__PAUSE_DECK__ = true;
+      } else {
+        window.__PAUSE_DECK__ = false;
+      }
+    };
+    document.addEventListener("visibilitychange", visHandler);
+
+    return () => {
+      alive = false;
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", visHandler);
+    };
   }, [SWIPE_MS, INTERVAL_MS, isMobile]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center relative select-none" style={{ overscrollBehaviorY: "contain" }}>
+    <div
+      className="w-full h-full flex items-center justify-center relative select-none"
+      style={{ overscrollBehaviorY: "contain" }}
+    >
       {springs.map(({ x, y, rotY, rotZ, scale, z, opacity }, i) => {
         const card = cardsData[i];
         const accent = fancyAccent(card.type);
@@ -243,7 +307,7 @@ function Deck() {
               ...fancyBg(card.type),
             }}
           >
-            {/* Isi kartu (tetap) */}
+            {/* Isi kartu */}
             <div className="w-full h-full rounded-2xl flex flex-col justify-start p-6 gap-4 text-white">
               <div>
                 <div className={`inline-block rounded-xl p-[3px] ${accent} shadow-sm`}>
@@ -256,7 +320,9 @@ function Deck() {
 
               {card.type === "about" && (
                 <div className="space-y-3 text-white/90 leading-relaxed text-base">
-                  {card.bullets.map((bullet, index) => <p key={index}>{bullet}</p>)}
+                  {card.bullets.map((bullet, index) => (
+                    <p key={index}>{bullet}</p>
+                  ))}
                 </div>
               )}
 
